@@ -57,30 +57,158 @@
 	</modules>
 	<profiles>
 		<profile>
-			<id>test</id>
+			<id>dev</id>
+			<repositories>
+				<repository>
+					<id>dev</id>
+					<url>http://nexus.dev.yunnex.com/nexus/content/groups/public/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>center</id>
+					<url>http://repo1.maven.org/maven2/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+				</repository>
+			</repositories>
+			<properties>
+				<package.environment>dev</package.environment>
+			</properties>
 			<activation>
-				<file>
-					<missing>.project</missing>
-				</file>
+				<activeByDefault>true</activeByDefault>
 			</activation>
-			<modules>
-				<module>dubbo-test</module>
-			</modules>
+			<distributionManagement>
+				<repository>
+					<id>dev</id>
+					<name>Nexus Releases Repository</name>
+					<url>http://nexus.dev.yunnex.com/nexus/content/repositories/Dev</url>
+				</repository>
+				<snapshotRepository>
+					<id>snapshots</id>
+					<name>Nexus Snapshots Repository</name>
+					<url>http://nexus.dev.yunnex.com/nexus/content/repositories/snapshots</url>
+				</snapshotRepository>
+			</distributionManagement>
 		</profile>
 		<profile>
-			<id>hudson</id>
+			<id>test</id>
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<configuration>
-							<testFailureIgnore>true</testFailureIgnore>
-						</configuration>
+						<groupId>org.zt</groupId>
+						<artifactId>asset-cache-control</artifactId>
 					</plugin>
 				</plugins>
 			</build>
+			<repositories>
+				<repository>
+					<id>release</id>
+					<url>http://nexus.dev.yunnex.com/nexus/content/repositories/releases</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+				</repository>
+				<repository>
+					<id>center</id>
+					<url>http://repo1.maven.org/maven2/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+				</repository>
+			</repositories>
+			<distributionManagement>
+				<repository>
+					<id>dev</id>
+					<name>Nexus Releases Repository</name>
+					<url>http://nexus.dev.yunnex.com/nexus/content/repositories/Dev</url>
+				</repository>
+				<snapshotRepository>
+					<id>snapshots</id>
+					<name>Nexus Snapshots Repository</name>
+					<url>http://nexus.dev.yunnex.com/nexus/content/repositories/snapshots</url>
+				</snapshotRepository>
+			</distributionManagement>
 		</profile>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.zt</groupId>
+						<artifactId>asset-cache-control</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<properties>
+				<package.environment>prod</package.environment>
+			</properties>
+			<repositories>
+				<repository>
+					<id>release</id>
+					<url>http://nexus.dev.yunnex.com/nexus/content/repositories/releases</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+				</repository>
+				<repository>
+					<id>thirdparty</id>
+					<url>http://nexus.dev.yunnex.com/nexus/content/repositories/thirdparty</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+				</repository>
+				<repository>
+					<id>center</id>
+					<url>http://repo1.maven.org/maven2/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+				</repository>
+			</repositories>
+			<distributionManagement>
+				<repository>
+					<id>release</id>
+					<name>Nexus Releases Repository</name>
+					<url>http://nexus.dev.yunnex.com/nexus/content/repositories/releases</url>
+				</repository>
+				<snapshotRepository>
+					<id>snapshots</id>
+					<name>Nexus Snapshots Repository</name>
+					<url>http://nexus.dev.yunnex.com/nexus/content/repositories/snapshots</url>
+				</snapshotRepository>
+			</distributionManagement>
+		</profile>
+		<!--		<profile>-->
+<!--			<id>test</id>-->
+<!--			<activation>-->
+<!--				<file>-->
+<!--					<missing>.project</missing>-->
+<!--				</file>-->
+<!--			</activation>-->
+<!--			<modules>-->
+<!--				<module>dubbo-test</module>-->
+<!--			</modules>-->
+<!--		</profile>-->
+<!--		<profile>-->
+<!--			<id>hudson</id>-->
+<!--			<build>-->
+<!--				<plugins>-->
+<!--					<plugin>-->
+<!--						<groupId>org.apache.maven.plugins</groupId>-->
+<!--						<artifactId>maven-surefire-plugin</artifactId>-->
+<!--						<configuration>-->
+<!--							<testFailureIgnore>true</testFailureIgnore>-->
+<!--						</configuration>-->
+<!--					</plugin>-->
+<!--				</plugins>-->
+<!--			</build>-->
+<!--		</profile>-->
 	</profiles>
 	<properties>
 		<!-- Common libs -->
